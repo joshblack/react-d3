@@ -17,7 +17,7 @@ export default class LineChart {
       .range([height, 0]);
 
     return (
-      <SVG width={width} height={height}>
+      <SVG width={width} height={height} style={{ padding: 15 }}>
         <g>
           <Line
             x={(d) => x(d.date)}
@@ -28,8 +28,31 @@ export default class LineChart {
             y={(d) => y(d.price)}
             y0={height}
             data={data} />
+          <g>
+            {
+              data.map((d, i) =>
+                <Circle key={i} cx={x(d.date)} cy={y(d.price)} />)
+            }
+          </g>
         </g>
       </SVG>
+    );
+  }
+}
+
+class Circle {
+  render() {
+    return (
+      <circle
+        style={{
+          fill: 'white',
+          stroke: '#DEDEDA',
+          strokeWidth: 2
+        }}
+        r={3}
+        cx={this.props.cx}
+        cy={this.props.cy}
+      />
     );
   }
 }

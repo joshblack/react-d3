@@ -1,8 +1,8 @@
 import SVG from './SVG';
 import Radium from 'radium';
+import { layout, svg } from 'd3';
 import { Spring } from 'react-motion';
 import { Component, PropTypes } from 'react';
-import { interpolate, layout, svg } from 'd3';
 
 export default class PieChart extends Component {
   static defaultProps = {

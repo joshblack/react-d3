@@ -1,4 +1,7 @@
 import SVG from './SVG';
+import Line from './Line';
+import Area from './Area';
+import { PropTypes } from 'react';
 import { extent, max, scale, svg, time } from 'd3';
 
 export default class LineChart {
@@ -13,46 +16,20 @@ export default class LineChart {
       .domain([0, max(data, (d) => d.price)])
       .range([height, 0]);
 
-    const area = svg.area()
-      .x((d) => x(d.date))
-      .y0(height)
-      .y1((d) => y(d.price));
-
-    const line = svg.line()
-      .x((d) => x(d.date))
-      .y((d) => y(d.price));
-
     return (
       <SVG width={width} height={height}>
         <g>
-          <Line d={line(data)} />
-          <Area d={area(data)} />
+          <Line
+            x={(d) => x(d.date)}
+            y={(d) => y(d.price)}
+            data={data} />
+          <Area
+            x={(d) => x(d.date)}
+            y={(d) => y(d.price)}
+            y0={height}
+            data={data} />
         </g>
       </SVG>
-    );
-  }
-}
-
-class Line {
-  render() {
-    return (
-      <path
-        style={{
-          fill: 'none',
-          stroke: '#666666',
-          strokeWidth: '1.5px'
-        }}
-        d={this.props.d} />
-    );
-  }
-}
-
-class Area {
-  render() {
-    return (
-      <path
-        style={{ fill: '#E7E7E7' }}
-        d={this.props.d} />
     );
   }
 }

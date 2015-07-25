@@ -2,7 +2,7 @@ import SVG from './SVG';
 import Line from './Line';
 import Area from './Area';
 import { PropTypes } from 'react';
-import { extent, max, scale, svg, time } from 'd3';
+import { extent, max, scale, time } from 'd3';
 
 export default class LineChart {
   render() {

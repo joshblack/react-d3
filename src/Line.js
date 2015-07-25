@@ -2,10 +2,14 @@ import { svg } from 'd3';
 import { PropTypes } from 'react';
 
 export default class Line {
-  static defaultProps = {
+  static propTypes = {
     data: PropTypes.array.isRequired,
     x: PropTypes.func.isRequired,
     y:  PropTypes.func.isRequired
+  }
+
+  static defaultProps = {
+    stroke: '#666666'
   }
 
   constructor(props) {
@@ -19,7 +23,7 @@ export default class Line {
       <path
         style={{
           fill: 'none',
-          stroke: '#666666',
+          stroke: this.props.stroke,
           strokeWidth: '1.5px'
         }}
         d={this.line(this.props.data)} />
